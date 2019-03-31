@@ -1,5 +1,6 @@
-package com.service;
+package com.service.impl;
 
+import com.service.UserService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,7 @@ import static org.junit.Assert.*;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
-public class UserServiceTest {
+public class UserServiceImplTest {
 
     @Autowired
     private UserService userService;
@@ -22,5 +23,10 @@ public class UserServiceTest {
     @Test
     public void getAllUser() {
         userService.getAllUser();
+    }
+
+    @Test
+    public void getUserAndRole() {
+        userService.getUserAndRole();
     }
 }

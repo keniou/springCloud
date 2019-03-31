@@ -64,6 +64,8 @@ public class User implements Serializable {
      *
      * 关系拥有方
      *
+     * fetch = FetchType.EAGER 可以关闭懒加载，实现级联查询
+     *
      * */
     @ManyToMany
     @JoinTable(name = "users_roles"

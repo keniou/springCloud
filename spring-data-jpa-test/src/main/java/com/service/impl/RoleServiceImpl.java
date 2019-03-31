@@ -20,6 +20,7 @@ public class RoleServiceImpl implements RoleService {
     @Autowired
     private RoleRepository roleRepository;
 
+    @Override
     public void getRolesByUserId() {
         List<Role> res = roleRepository.findByUsersId(1L);
         log.info(String.valueOf(res));
