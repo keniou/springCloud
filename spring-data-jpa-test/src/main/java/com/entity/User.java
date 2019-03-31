@@ -71,4 +71,24 @@ public class User implements Serializable {
             , inverseJoinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "id")}
     )
     private Set<Role> roles;
+
+
+    /**
+     *
+     * 使用toString()需要排除订单外键字段，否则会出错
+     *
+     * */
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", avatar='" + avatar + '\'' +
+                ", createTime=" + createTime +
+                ", email='" + email + '\'' +
+                ", enabled=" + enabled +
+                ", password='" + password + '\'' +
+                ", username='" + username + '\'' +
+                ", lastPasswordResetTime=" + lastPasswordResetTime +
+                '}';
+    }
 }

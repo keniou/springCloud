@@ -31,6 +31,7 @@ public class Role implements Serializable {
     @Column(name = "remark")
     private String remark;
 
+
     /**使用mappedBy
      * 缺少描述外键信息的注解，查找时jpa似乎无法查找数据并封装到users，
      * 因此我们需要告诉jpa去哪找外键信息。
@@ -45,5 +46,21 @@ public class Role implements Serializable {
     @ManyToMany(mappedBy = "roles")
     @JsonIgnore
     private List<User> users;
+
+
+    /**
+     *
+     * 使用toString()需要排除订单外键字段，否则会出错
+     *
+     * */
+    @Override
+    public String toString() {
+        return "Role{" +
+                "id=" + id +
+                ", createTime=" + createTime +
+                ", name='" + name + '\'' +
+                ", remark='" + remark + '\'' +
+                '}';
+    }
 
 }
