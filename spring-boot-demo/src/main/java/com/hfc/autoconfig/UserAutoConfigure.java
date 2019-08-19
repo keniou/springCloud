@@ -25,10 +25,12 @@ public class UserAutoConfigure {
         return new UserClient(userProperties);
     }
 
+    /**
+     * 对接口的方法的重写
+     * @return
+     */
     @Bean
     public TestUser testUser() {
-        return o -> {
-
-        };
+        return sd -> {};
     }
 }
