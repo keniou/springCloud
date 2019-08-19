@@ -10,7 +10,112 @@
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>spring-data-jpa-test</module>
+        <module>study-test</module>
+        <module>sprig-cloud-demo</module>
+        <module>spring-boot-demo</module>
     </modules>
 
+    <properties>
+        <java.version>1.8</java.version>
+        <spring.boot.version>2.1.0.RELEASE</spring.boot.version>
+        <spring-cloud.version>Finchley.RELEASE</spring-cloud.version>
+    </properties>
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <!--lombok插件-->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+    </dependencies>
 
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring.boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+
+
+    <distributionManagement>
+        <repository>
+            <id>nexus-private-releases</id>
+            <name>nexus releases repository</name>
+            <url>http://pre.xnshandai.net/nexus/content/groups/elect3.0/</url>
+        </repository>
+        <snapshotRepository>
+            <id>nexus-private-snapshots</id>
+            <name>nexus snapshots repository</name>
+            <url>http://pre.xnshandai.net/nexus/content/repositories/snapshots/</url>
+        </snapshotRepository>
+    </distributionManagement>
+
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <properties>
+                <project.active>dev</project.active>
+            </properties>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+        <profile>
+            <id>test</id>
+            <properties>
+                <project.active>test</project.active>
+            </properties>
+        </profile>
+    </profiles>
+
+
+    <build>
+        <plugins>
+            <plugin>
+                <!-- 打包插件 -->
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>2.0.3.RELEASE</version>
+                <configuration>
+                    <!-- jar是否可执行 -->
+                    <executable>true</executable>
+                    <mainClass>com.test</mainClass>
+                </configuration>
+            </plugin>
+            <plugin>
+                <!-- 编译插件，指定JDK版本 -->
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                    <encoding>UTF-8</encoding>
+                    <compilerArgs>
+                        <arg>-parameters</arg>
+                    </compilerArgs>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>

@@ -1,0 +1,13 @@
+{
+  "properties": [
+    {
+      "defaultValue": "abcd",
+      "name": "spring.user.name"
+    },
+    {
+      "defaultValue": "true",
+      "name": "spring.user.enable",
+      "type": "java.lang.Boolean"
+    }
+  ]
+}

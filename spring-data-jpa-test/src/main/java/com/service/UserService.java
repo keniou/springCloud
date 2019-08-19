@@ -9,4 +9,6 @@ public interface UserService {
     void getAllUser();
 
     void getUserAndRole();
+
+    void add();
 }
