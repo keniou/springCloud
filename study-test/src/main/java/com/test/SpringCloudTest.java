@@ -1,26 +1,21 @@
 package com.test;
 
+import com.netflix.loadbalancer.ILoadBalancer;
+import com.netflix.loadbalancer.IRule;
+import com.netflix.loadbalancer.Server;
+import feign.Retryer;
 import lombok.Data;
-import org.springframework.aop.interceptor.AsyncUncaughtExceptionHandler;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.cloud.netflix.ribbon.RibbonClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
-import org.springframework.scheduling.annotation.Async;
-import org.springframework.scheduling.annotation.AsyncConfigurer;
-import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.stereotype.Component;
 
 import java.lang.annotation.*;
-import java.util.concurrent.Executor;
+import java.util.List;
 
 /**
  * @author huangfeichang.
@@ -75,19 +70,50 @@ class UserAutoConfigure {
 
 }
 
+class MyRule implements IRule {
 
-@Configuration
-@EnableWebSecurity
-class WebSecurity extends WebSecurityConfigurerAdapter {
+    private ILoadBalancer iLoadBalancer;
+
     @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        // 关闭csrf
-        http.csrf().disable();
-        // 支持httpBasic
-        http.authorizeRequests()
-                .anyRequest()
-                .authenticated()
-                .and()
-                .httpBasic();
+    public Server choose(Object o) {
+        // 所有服务
+        List<Server> list = iLoadBalancer.getAllServers();
+        return null;
+    }
+
+    @Override
+    public void setLoadBalancer(ILoadBalancer iLoadBalancer) {
+        this.iLoadBalancer = iLoadBalancer;
+    }
+
+    @Override
+    public ILoadBalancer getLoadBalancer() {
+        return iLoadBalancer;
     }
 }
+
+@Configuration
+class BeanConfiguration {
+
+    @Bean
+    public MyRule myRule() {
+        return new MyRule();
+    }
+
+    @Bean
+    public Retryer retryer() {
+        return new Retryer.Default(5000, 5000, 4);
+    }
+}
+
+/**
+ * xxxx是调用的服务名称
+ */
+@RibbonClient(name = "xxxx", configuration = BeanConfiguration.class)
+class RibbonClientConfig {
+
+}
+
+
+
+
