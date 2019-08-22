@@ -21,6 +21,6 @@ public class BeanConfiguration {
      */
     @Bean
     public Retryer retryer() {
-        return new Retryer.Default(5000, 5000, 2);
+        return new Retryer.Default(1000, 1000, 2);
     }
 }
