@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
  * @date 2019/8/22 0022.
  */
 @Configuration
-public class BeanConfiguration {
+public class FeignRetryerConfiguration {
 
     /**
      * 在配置了ribbon的超时时间到后，在加5s执行一次重试，执行1次，本身一次算一次
@@ -21,6 +21,6 @@ public class BeanConfiguration {
      */
     @Bean
     public Retryer retryer() {
-        return new Retryer.Default(1000, 1000, 2);
+        return new Retryer.Default(2000, 2000, 3);
     }
 }
