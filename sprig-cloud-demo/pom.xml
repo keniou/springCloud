@@ -15,6 +15,7 @@
         <module>server01</module>
         <module>client01</module>
         <module>feign-api</module>
+        <module>gateway</module>
     </modules>
 
 </project>

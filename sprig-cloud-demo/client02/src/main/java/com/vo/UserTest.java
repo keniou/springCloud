@@ -1,4 +1,4 @@
-package com.hfc.vo;
+package com.vo;
 
 import java.util.List;
 
