@@ -9,11 +9,12 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>sprig-cloud-demo</artifactId>
+    <artifactId>spring-cloud-demo</artifactId>
     <packaging>pom</packaging>
     <modules>
         <module>server01</module>
         <module>client01</module>
+        <module>client02</module>
         <module>feign-api</module>
         <module>gateway</module>
     </modules>

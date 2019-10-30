@@ -11,7 +11,7 @@
     <modules>
         <module>spring-data-jpa-test</module>
         <module>study-test</module>
-        <module>sprig-cloud-demo</module>
+        <module>spring-cloud-demo</module>
         <module>spring-boot-demo</module>
         <module>mini-spring</module>
     </modules>
